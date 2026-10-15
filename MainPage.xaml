@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MemoGame.MainPage"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Color x:Key="PageBackground">#F4F6F9</Color>
+			<Color x:Key="CardClosedBrush">#3B82F6</Color>
+			<Color x:Key="CardOpenBrush">#FFFFFF</Color>
+			<Color x:Key="TextColorBrush">#1E293B</Color>
+			<x:String x:Key="DefaultFont">OpenSansRegular</x:String>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ScrollView>
+		<VerticalStackLayout Spacing="14" Padding="16">
+			<!-- Верхняя панель управления и статистика -->
+			<Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+				<HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="10">
+					<Label Text="Käike:" TextColor="{DynamicResource TextColorBrush}" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+					<Label x:Name="MovesLabel" Text="0" TextColor="{DynamicResource TextColorBrush}" VerticalTextAlignment="Center"/>
+					<Label Text="Aeg:" TextColor="{DynamicResource TextColorBrush}" FontAttributes="Bold" Margin="10,0,0,0" VerticalTextAlignment="Center"/>
+					<Label x:Name="TimerLabel" Text="0s" TextColor="{DynamicResource TextColorBrush}" VerticalTextAlignment="Center"/>
+				</HorizontalStackLayout>
+
+				<Picker x:Name="ThemePicker" 
+                        Grid.Row="0" Grid.Column="1" 
+                        Title="Teema" 
+                        TextColor="{DynamicResource TextColorBrush}"
+                        SelectedIndexChanged="OnThemeChanged"/>
+
+				<Label x:Name="BestScoreLabel" 
+                       Grid.Row="1" Grid.ColumnSpan="2" 
+                       Text="Parim: -" 
+                       TextColor="{DynamicResource TextColorBrush}" 
+                       FontSize="12" Margin="0,4,0,0"/>
+			</Grid>
+
+			<!-- Игровое поле 4х4 -->
+			<Border StrokeShape="RoundRectangle 12" Stroke="Transparent" BackgroundColor="Transparent">
+				<Grid x:Name="BoardGrid"
+                      RowDefinitions="80,80,80,80"
+                      ColumnDefinitions="80,80,80,80"
+                      ColumnSpacing="8"
+                      RowSpacing="8"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center" />
+			</Border>
+
+			<!-- Кнопка перезапуска -->
+			<Button Text="Uus Mäng" 
+                    Clicked="OnRestartClicked"
+                    BackgroundColor="{DynamicResource CardClosedBrush}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HorizontalOptions="Center"
+                    WidthRequest="180"/>
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>
